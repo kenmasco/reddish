@@ -2,12 +2,13 @@ require 'spec_helper'
 
 describe 'editing a story' do 
   
+  before do
+    user = create(:user, email: 'b@b.com')
+    login_as user, scope: :user
+  end
 
   it "can change a story's title" do
-    user = User.new(email:"a@a.com", password: "12345678")
-    story = Story.new(title: "blabla", link: "http://yo.com")
-    story.user = user
-    story.save
+    story = create(:story)
     visit '/stories'
 
     click_link "Edit story" 
@@ -18,10 +19,7 @@ describe 'editing a story' do
   end
 
   it "can delete a story" do
-        user = User.new(email:"a@a.com", password: "12345678")
-    story = Story.new(title: "blabla", link: "http://yo.com")
-    story.user = user
-    story.save
+    story = create(:story)
     visit '/stories'
     click_link "Delete"
 
