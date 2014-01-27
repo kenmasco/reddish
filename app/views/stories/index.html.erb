@@ -4,4 +4,7 @@
   </h1>
     <p><%= story.link %></p>
     <p><%= story.user %></p>
+
+  <%= link_to 'Edit story', edit_story_path(story) %>
+  <%= link_to 'Delete', story_path(story), method: :delete, data: { confirm: 'Are you sure?' } %>
 <% end %>
