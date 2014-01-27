@@ -1,9 +1,15 @@
 Rails.application.routes.draw do
 
-  get "stories/new"
-
+  devise_for :users
+  # root "stories#index"
   resources :stories do
+    resources :votes
   end
+
+  # root "stories#index"
+  # # # get "stories/new"
+
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

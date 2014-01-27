@@ -1,8 +1,8 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :story do
-    title "A great story"
-    link "http://#"
+  factory :user do
+    email "w@3.com"
+    password "12345678"
   end
 end

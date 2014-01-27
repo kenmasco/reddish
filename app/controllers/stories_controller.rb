@@ -1,10 +1,13 @@
 class StoriesController < ApplicationController
+
+  before_action :authenticate_user!, except: [:index]
   def new
     @story = Story.new
   end
 
   def create
-    @story = Story.new params[:story].permit(:title, :link, :user)
+    @story = Story.new params[:story].permit(:title, :link)
+    @story.user = current_user
   
     if @story.save
       redirect_to stories_path
@@ -23,7 +26,7 @@ class StoriesController < ApplicationController
 
   def update
     @story = Story.find params[:id]
-    @story.update params[:story].permit(:title, :link, :user)
+    @story.update params[:story].permit(:title, :link)
     redirect_to '/stories'
   end
 
