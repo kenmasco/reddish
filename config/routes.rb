@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
 
-  devise_for :users
-  # root "stories#index"
+  root "stories#index"
+  devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
   resources :stories do
     resources :votes
   end
 
-  # root "stories#index"
+
+
+  
   # # # get "stories/new"
 
   

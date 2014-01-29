@@ -37,6 +37,14 @@ gem 'spring',        group: :development
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git', :branch => 'bootstrap3'
 
 gem 'devise'
+gem 'omniauth-twitter'
+
+gem 'websocket-rails'
+gem 'thin'
+
+gem "pismo", "~> 0.7.4"
+gem 'link_thumbnailer'
+gem 'nokogiri'
 
 group :test, :development do
   gem "rspec-rails", "~> 2.14.1"

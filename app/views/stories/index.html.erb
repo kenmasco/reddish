@@ -1,16 +1,40 @@
 <h1>
 Reddish
 </h1>
-<% @stories.each do |story| %>
-  <h3 class='votes_count' data-id='<%= story.id %>'><%= story.points %></h3>
-  <%= button_to 'Upvote', story_votes_path(story, up: true), remote: true %>
-  <%= button_to 'Downvote', story_votes_path(story, up: false), remote: true %>
-  <h2><%= story.title %></h2>
-  <p><%= story.link %></p>
-  <p><%= story.user.email %></p>
-
-  <%= link_to 'Edit story', edit_story_path(story) %>
-  <%= link_to 'Delete', story_path(story), method: :delete, data: { confirm: 'Are you sure?' } %>
-<% end %>
+  <div class="story-container"> 
+    <% @stories.each do |story| %>
+      <div class="stories">
+        <div class="row story_blocks">
+          <div class="col-md-3">
+          <img src=<%= story.image %> class="img-rounded preview_thumb">
+          </div>
+          <div class="col-md-7">
+          <h2><%= story.title %></h2>
+          <p><%= story.opening %></p>
+          </div>
+          <div class="col-md-2">
+          <h5>Rating:</h5>
+            <h4 class='votes_count' data-id='<%= story.id %>'><%= story.points %></h4>
+            <%= button_to 'Upvote', story_votes_path(story, up: true), remote: true, class: "btn btn-success btn-block" %>
+            <%= button_to 'Downvote', story_votes_path(story, up: false), remote: true, class: "btn btn-danger btn-block" %>  
+            <p><%= story.user %></p>
+            <%= link_to 'Edit story', edit_story_path(story) %>
+            <% if story.user_id == current_user.id %>
+            <%= link_to 'Delete', story_path(story), method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
 <br>
-<%= link_to 'Add a story', new_story_path %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+    </div>
+    <div class="col-md-2">
+      <%= link_to 'Add a story', new_story_path, class: "btn btn-primary" %>
+    </div>
+  </div>
+</div>
+    

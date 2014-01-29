@@ -34,49 +34,47 @@
     <!-- Size should be 32 x 32 pixels -->
     <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
 
-    <%= javascript_include_tag "application" %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   </head>
   <body>
 
-    <div class="navbar navbar-static-top">
-      <div class="container">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">Reddish</a>
-        <div class="nav-collapse collapse navbar-responsive-collapse">
-          <ul class="nav navbar-nav">
-            <li><%= link_to "Link1", "/path1"  %></li>
-            <li><%= link_to "Link2", "/path2"  %></li>
-            <li><%= link_to "Link3", "/path3"  %></li>
-          </ul>
-        </div>
-      </div>
-    </div>
+  <nav class="navbar navbar-inverse" role="navigation">
+    <ul class="nav navbar-nav">
+      <a class="navbar-brand" href="#">Reddish</a>
+        <!-- <div class="rhs_nav"> -->
+          <% if user_signed_in? %>
+            <li>
+              <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>        
+            </li>
+            <li>
+              <%= link_to('Manage Your Account', edit_user_registration_path) %>
+            </li>
+          <% else %>
+            <li>
+              <%= link_to('Login', new_user_session_path)  %>  
+            </li>
+            <li>
+              <%= link_to('Register', new_user_registration_path)  %>
+            </li>
+          <%end%>
+          <li>
+            <%= link_to 'Add a story', new_story_path, class: "btn btn-primary add-a-story" %>
+          </li>
+        <!-- </div> -->
+    </ul>
+  </nav>
+    
 
     <div class="container">
       <div class="row">
-        <div class="col-lg-9">
+        <div class="col-lg-10">
           <%= bootstrap_flash %>
           <%= yield %>
         </div>
-        <div class="col-lg-3">
-          <div class="well sidebar-nav">
-            <h3>Sidebar</h3>
-            <ul class="nav nav-list">
-              <li class="nav-header">Sidebar</li>
-              <li><%= link_to "Link1", "/path1"  %></li>
-              <li><%= link_to "Link2", "/path2"  %></li>
-              <li><%= link_to "Link3", "/path3"  %></li>
-            </ul>
-          </div><!--/.well -->
-        </div><!--/span-->
       </div><!--/row-->
 
       <footer>
-        <p>&copy; Company 2014</p>
+        <p>&copy; Reddish 2014</p>
       </footer>
 
     </div> <!-- /container -->

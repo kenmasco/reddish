@@ -4,6 +4,6 @@ FactoryGirl.define do
   factory :story do
     title "A great story"
     link "http://#"
-    user
+    user_id 1
   end
 end

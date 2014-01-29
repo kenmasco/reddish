@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'editing a story' do 
   
   before do
-    user = create(:user, email: 'b@b.com')
+    user = create(:user)
     login_as user, scope: :user
   end
 
@@ -18,7 +18,7 @@ describe 'editing a story' do
     expect(page).to have_content 'A New Title'
   end
 
-  it "can delete a story" do
+  it "a user can delete a story they created" do
     story = create(:story)
     visit '/stories'
     click_link "Delete"

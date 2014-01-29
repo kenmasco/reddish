@@ -6,6 +6,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   config.secret_key = 'e8252e229de8bcd9fb6e555b795d03cfdea73746a1300d31fb8c459ec03d6d27d60f218884f381257b41e62ab40f18e8c94901c4a13a2f376ef15c0b61830647'
 
+
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
@@ -227,7 +228,10 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
+
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
+  config.omniauth :twitter, Rails.application.secrets.twitter_key, Rails.application.secrets.twitter_secret
+  
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
