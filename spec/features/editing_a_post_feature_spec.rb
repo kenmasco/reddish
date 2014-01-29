@@ -3,12 +3,11 @@ require 'spec_helper'
 describe 'editing a story' do 
   
   before do
-    user = create(:user)
-    login_as user, scope: :user
+    story = create(:story)
+    login_as story.user, scope: :user
   end
 
   it "can change a story's title" do
-    story = create(:story)
     visit '/stories'
 
     click_link "Edit story" 
@@ -19,7 +18,6 @@ describe 'editing a story' do
   end
 
   it "a user can delete a story they created" do
-    story = create(:story)
     visit '/stories'
     click_link "Delete"
 

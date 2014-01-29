@@ -12,7 +12,7 @@ class Story < ActiveRecord::Base
 
   def self.page_preview(url)
     doc = Pismo::Document.new(url)
-    page = {title: doc.title, opening: doc.sentences(3)}
+    page = {title: doc.title, opening: doc.body}
   end
 
   def self.page_image(url)

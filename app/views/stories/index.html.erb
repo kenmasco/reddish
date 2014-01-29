@@ -5,23 +5,32 @@ Reddish
     <% @stories.each do |story| %>
       <div class="stories">
         <div class="row story_blocks">
-          <div class="col-md-3">
+          <div class="col-md-3 image_div">
           <img src=<%= story.image %> class="img-rounded preview_thumb">
           </div>
-          <div class="col-md-7">
-          <h2><%= story.title %></h2>
-          <p><%= story.opening %></p>
+          <div class="col-md-7 story_text">
+          <h2><a href='<%= story.link %>' target='_blank'><%=story.title.truncate(78) %></a></h2>
+          <p><%= story.opening.truncate(380, omission: '... (continued)') %></p>
           </div>
           <div class="col-md-2">
-          <h5>Rating:</h5>
-            <h4 class='votes_count' data-id='<%= story.id %>'><%= story.points %></h4>
-            <%= button_to 'Upvote', story_votes_path(story, up: true), remote: true, class: "btn btn-success btn-block" %>
-            <%= button_to 'Downvote', story_votes_path(story, up: false), remote: true, class: "btn btn-danger btn-block" %>  
-            <p><%= story.user %></p>
-            <%= link_to 'Edit story', edit_story_path(story) %>
-            <% if story.user_id == current_user.id %>
-            <%= link_to 'Delete', story_path(story), method: :delete, data: { confirm: 'Are you sure?' } %>
-            <% end %>
+            <div class="row rating">
+              <div class="col-md-6 rating_text">
+                <h4>Rating:</h4>
+              </div>
+              <div class="col-md-6 rating_number">
+              <h4 class='votes_count' data-id='<%= story.id %>'><%= story.points %></h4>
+              </div>
+            </div>
+            <div class="row">
+              <%= button_to 'Upvote', story_votes_path(story, up: true), remote: true, class: "btn btn-success btn-block" %>
+              <p></p>
+              <%= button_to 'Downvote', story_votes_path(story, up: false), remote: true, class: "btn btn-danger btn-block" %>  
+              <p><%= story.user %></p>
+              <%= link_to 'Edit story', edit_story_path(story) %>
+              <% if user_signed_in? && story.user_id == current_user.id %>
+              <%= link_to 'Delete', story_path(story), method: :delete, data: { confirm: 'Are you sure?' } %>
+              <% end %>
+            </div>
           </div>
         </div>
       </div>
@@ -30,11 +39,10 @@ Reddish
 <br>
 <div class="container">
   <div class="row">
-    <div class="col-md-8">
-    </div>
-    <div class="col-md-2">
+    <div class="col-md-12 add_a_story_footer">
       <%= link_to 'Add a story', new_story_path, class: "btn btn-primary" %>
     </div>
   </div>
 </div>
-    
+<footer>
+</footer>

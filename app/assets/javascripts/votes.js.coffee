@@ -3,10 +3,26 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 sortStories = ->
-  $('.story-container > .stories').tsort('.votes_count', { order: 'desc'})
-  
+  $('.story-container > .stories').tsort('.votes_count', { order: 'desc'}).each (i, story) ->
+    $(story).css({ position: 'absolute' })
+    $(story).animate {top: i * window.lineHeight }, 750 
 
 $(document).ready ->
+  window.lineHeight = 0
+  $container = $('.story-container')
+  $container.css position:'relative', height: $container.height(), display:'block'
+
+  $stories = $('.story-container > .stories')
+
+  $stories.each (index, story) ->
+    posY = $(story).position().top
+    console.log(posY)
+
+    $(story).css({ top: posY })
+
+    if(index == 1)
+      window.lineHeight = posY
+
   sortStories()
 
   dispatcher = new WebSocketRails(window.location.host + '/websocket')
